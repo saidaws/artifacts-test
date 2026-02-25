@@ -28,8 +28,6 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v5
-        # with:
-        #   name: test-files
 
       - name: Verify downloaded files
         run: |
