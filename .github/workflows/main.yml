@@ -1,0 +1,39 @@
+name: Test Artifacts
+
+on: workflow_dispatch
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create test files
+        run: |
+          echo "Hello from file 1" > file1.txt
+          echo "Hello from file 2" > file2.txt
+          mkdir folder
+          echo "Hello from nested file" > folder/file3.txt
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-files
+          path: |
+            file1.txt
+            file2.txt
+            folder/
+
+  download:
+    runs-on: ubuntu-latest
+    needs: upload
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: test-files
+
+      - name: Verify downloaded files
+        run: |
+          cat file1.txt
+          cat file2.txt
+          cat folder/file3.txt
+          echo "All files downloaded successfully!"
