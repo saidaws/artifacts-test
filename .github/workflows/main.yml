@@ -16,7 +16,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v5
         with:
-          name: test-files
+          # name: test-files
           path: |
             file1.txt
             file2.txt
